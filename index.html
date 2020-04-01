@@ -1,30 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="page">
     <h1 class="page__heading">Virtual Keyboard</h1>
-    <textarea class="page__textarea page__textarea_border-green" placeholder="type text..." cols="40" rows="6"></textarea>
-    <button class="page__keyboard-btn page__keyboard-btn_theme-green" >Keyboard</button>
-    <div class="keyboard page__keyboard keyboard_theme-green keyboard_hidden" hidden>
+    <textarea class="page__textarea page__textarea_border-green" placeholder="type text..." cols="40"
+        rows="6"></textarea>
+    <button class="page__keyboard-btn page__keyboard-btn_theme-green">Keyboard</button>
+    <div class="keyboard page__keyboard keyboard_theme-green keyboard_hidden">
         <div class="keyboard__keys">
-            <button class="keyboard__key">1</button>
-            <button class="keyboard__key">2</button>
-            <button class="keyboard__key">3</button>
-            <button class="keyboard__key">4</button>
-            <button class="keyboard__key">5</button>
-            <button class="keyboard__key">6</button>
-            <button class="keyboard__key">7</button>
-            <button class="keyboard__key">9</button>
-            <button class="keyboard__key">0</button>
-            <button class="keyboard__key">-</button>
+            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">1</button>
+            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">2</button>
+            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">3</button>
+            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">4</button>
+            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">5</button>
+            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">6</button>
+            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">7</button>
+            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">9</button>
+            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">0</button>
+            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">-</button>
+            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-l">
+                <i class="material-icons">backspace</i>
+            </button>
         </div>
     </div>
-    
+
     <script src="./keyboard.js"></script>
 </body>
+
 </html>
