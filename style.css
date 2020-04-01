@@ -73,10 +73,13 @@
 
 .keyboard__keys {
     display: flex;
+    justify-content: center;
+    margin-top: 5px;
 }
 
 .keyboard__key {
     display: inline-flex;
+    justify-content: center;
     margin: 0 3px;
 
     font-size: 18px;
@@ -93,8 +96,17 @@
     padding: 7px 15px;
 }
 
+.keyboard__key_size-m {
+    padding: 7px 23px;
+}
+
 .keyboard__key_size-l {
     padding: 7px 30px;
+}
+
+.keyboard__key_size-xl {
+    width: 50%;
+    padding: 7px 0;
 }
 
 .keyboard__key_theme-grey {
