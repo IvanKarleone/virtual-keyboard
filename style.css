@@ -18,10 +18,13 @@
 }
 
 .page__textarea {
-    border: 1px solid #004134;
     border-radius: 5px;
 
     resize: none;
+}
+
+.page__textarea_border-green {
+    border: 1px solid #004134;
 }
 
 .page__keyboard-btn {
@@ -30,26 +33,37 @@
 
     color: white;
 
-    background-color: #004134;
     border: none;
     border-radius: 5px;
 }
 
-.keyboard {
-    position: fixed;
-    right: 25%;
-    bottom: 25%;
+.page__keyboard-btn_theme-green {
+    background-color: #004134;
+}
 
+.keyboard {
     display: flex;
     flex-direction: column;
-    padding: 5px 0;
-
-    background-color: #004134;
-    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-
-    user-select: none;
 }
 
 .keyboard_hidden {
     display: none;
+}
+
+.keyboard_theme-green {
+    background-color: #004134;
+}
+
+.keyboard_box-shadow-black {
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+}
+
+.page__keyboard {
+    position: fixed;
+    right: 25%;
+    bottom: 25%;
+
+    padding: 5px;
+
+    user-select: none;
 }
