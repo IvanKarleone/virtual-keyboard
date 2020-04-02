@@ -1,8 +1,10 @@
 "use strict"
 
 openCloseKeyboard();
+switchLanguage();
 dragKeybord();
 clickKeyboard();
+
 
 function openCloseKeyboard() {
     let btnKeyboard = document.querySelector(".page__keyboard-btn");
@@ -12,6 +14,36 @@ function openCloseKeyboard() {
     btnKeyboard.addEventListener("click", () => {
         keyboard.classList.toggle("keyboard_hidden");
     });
+}
+
+function switchLanguage() {
+    let switchsLanguage = document.querySelectorAll(".switch-language");
+    let keyboard = document.querySelector(".keyboard");
+
+    for (let switchLanguage of switchsLanguage) {
+        switchLanguage.addEventListener("click", () => {
+            if (keyboard.dataset.language == "ENG") {
+                keyboard.dataset.language = "RUS";
+            } else {
+                keyboard.dataset.language = "ENG";
+            }
+
+            switchLanguageKeyboard(keyboard.dataset.language);
+        });
+    }
+
+    function switchLanguageKeyboard(language) {
+        let keys = Array.from(document.querySelectorAll(".keyboard__key")).filter(key => key.dataset.letterEng && key.dataset.letterRus);
+
+        switch (language) {
+            case "ENG": 
+                keys.forEach(key => key.innerText = key.dataset.letterEng);
+                break;
+            case "RUS":
+                keys.forEach(key => key.innerText = key.dataset.letterRus);
+                break;
+        }
+    }
 }
 
 function dragKeybord() {
@@ -62,7 +94,7 @@ function clickKeyboard() {
     keyboard.addEventListener("click", (event) => {
         let key = event.target.closest(".keyboard__key");
 
-        if (!key) {
+        if (!key || event.target.classList.contains("switch-language")) {
             return;
         }
 
@@ -94,7 +126,9 @@ function clickKeyboard() {
         function transformLetters(capslockIsActive) {
             let keys = Array.from(document.querySelectorAll(".keyboard__key"));
             let letters = keys.filter(letter => {
-                if (letter.innerText.toLowerCase().charCodeAt() >= 97 && letter.innerText.toLowerCase().charCodeAt() <= 122 && letter.innerText.length == 1) {
+                if ((letter.innerText.toLowerCase().charCodeAt() >= 97 && letter.innerText.toLowerCase().charCodeAt() <= 122 ||
+                    letter.innerText.toLowerCase().charCodeAt() >= 1072 && letter.innerText.toLowerCase().charCodeAt() <= 1103) && 
+                    letter.innerText.length == 1) {
                     return letter;
                 }
             });
