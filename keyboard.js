@@ -76,8 +76,9 @@ function clickKeyboard() {
                     break;
                 case "capslock":
                     key.classList.toggle("keyboard__key_active");
+                    transformLetters(key.classList.contains("keyboard__key_active"));
                     break;
-                case "shift": 
+                case "shift":
                     key.classList.toggle("keyboard__key_active");
                     break;
                 case "space_bar":
@@ -87,7 +88,23 @@ function clickKeyboard() {
         } else {
             textarea.value += key.innerText;
         }
-        
+
         textarea.focus();
+
+        function transformLetters(capslockIsActive) {
+            let keys = Array.from(document.querySelectorAll(".keyboard__key"));
+            let letters = keys.filter(letter => {
+                if (letter.innerText.toLowerCase().charCodeAt() >= 97 && letter.innerText.toLowerCase().charCodeAt() <= 122 && letter.innerText.length == 1) {
+                    return letter;
+                }
+            });
+
+            if (capslockIsActive) {
+                letters.forEach(letter => letter.innerText = letter.innerText.toUpperCase());
+            } else {
+                letters.forEach(letter => letter.innerText = letter.innerText.toLowerCase());
+            }
+
+        }
     });
 }
