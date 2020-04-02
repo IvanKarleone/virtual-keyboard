@@ -23,6 +23,10 @@
     resize: none;
 }
 
+.page__textarea:focus {
+    outline: none;
+}
+
 .page__textarea_border-green {
     border: 1px solid #004134;
 }
@@ -93,6 +97,18 @@
     cursor: pointer;
 }
 
+.keyboard__key_theme-grey {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.keyboard__key_theme-grey:active {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.keyboard__key_active {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
 .keyboard__key_size-s {
     padding: 7px 15px;
 }
@@ -108,12 +124,4 @@
 .keyboard__key_size-xl {
     width: 50%;
     padding: 7px 0;
-}
-
-.keyboard__key_theme-grey {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.keyboard__key_theme-grey:active {
-    background-color: rgba(255, 255, 255, 0.12);
 }

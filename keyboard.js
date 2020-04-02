@@ -2,10 +2,12 @@
 
 openCloseKeyboard();
 dragKeybord();
+clickKeyboard();
 
 function openCloseKeyboard() {
     let btnKeyboard = document.querySelector(".page__keyboard-btn");
     let keyboard = document.querySelector(".keyboard");
+    let textarea = document.querySelector(".page__textarea");
 
     btnKeyboard.addEventListener("click", () => {
         keyboard.classList.toggle("keyboard_hidden");
@@ -50,5 +52,42 @@ function dragKeybord() {
                 }
             }
         }
+    });
+}
+
+function clickKeyboard() {
+    let keyboard = document.querySelector(".keyboard");
+    let textarea = document.querySelector(".page__textarea");
+
+    keyboard.addEventListener("click", (event) => {
+        let key = event.target.closest(".keyboard__key");
+
+        if (!key) {
+            return;
+        }
+
+        if (key.dataset.keyName) {
+            switch (key.dataset.keyName) {
+                case "backspace":
+                    textarea.value = textarea.value.slice(0, -1);
+                    break;
+                case "return":
+                    textarea.value += "\n";
+                    break;
+                case "capslock":
+                    key.classList.toggle("keyboard__key_active");
+                    break;
+                case "shift": 
+                    key.classList.toggle("keyboard__key_active");
+                    break;
+                case "space_bar":
+                    textarea.value += "\0";
+                    break;
+            }
+        } else {
+            textarea.value += key.innerText;
+        }
+        
+        textarea.focus();
     });
 }

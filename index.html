@@ -11,8 +11,7 @@
 
 <body class="page">
     <h1 class="page__heading">Virtual Keyboard</h1>
-    <textarea class="page__textarea page__textarea_border-green" placeholder="type text..." cols="40"
-        rows="6"></textarea>
+    <textarea class="page__textarea page__textarea_border-green" placeholder="type text..." cols="40" rows="6"></textarea>
     <button class="page__keyboard-btn page__keyboard-btn_theme-green">Keyboard</button>
     <div class="keyboard page__keyboard keyboard_theme-green keyboard_hidden">
         <div class="keyboard__keys">
@@ -26,7 +25,7 @@
             <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">9</button>
             <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">0</button>
             <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">-</button>
-            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-l">
+            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-l" data-key-name="backspace">
                 <i class="material-icons">backspace</i>
             </button>
         </div>
@@ -43,7 +42,7 @@
             <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">p</button>
         </div>
         <div class="keyboard__keys">
-            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-m">
+            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-m" data-key-name="capslock">
                 <i class="material-icons">keyboard_capslock</i>
             </button>
             <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">a</button>
@@ -56,12 +55,12 @@
             <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">k</button>
             <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">l</button>
             <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">;</button>
-            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-m">
+            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-m" data-key-name="return">
                 <i class="material-icons">keyboard_return</i>
             </button>
         </div>
         <div class="keyboard__keys">
-            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-l">
+            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-l" data-key-name="shift">
                 <i class="material-icons" style="transform: rotate(-90deg);">forward</i>
             </button>
             <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">z</button>
@@ -76,7 +75,8 @@
             <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-s">/</button>
         </div>
         <div class="keyboard__keys">
-            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-xl" style="justify-content: space-between;">
+            <button class="keyboard__key keyboard__key_theme-grey keyboard__key_size-xl" style="justify-content: space-between;"
+            data-key-name="space_bar">
                 <i class="material-icons">keyboard_arrow_left</i>
                 <i class="material-icons">space_bar</i>
                 <i class="material-icons">keyboard_arrow_right</i>
