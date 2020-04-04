@@ -3,7 +3,7 @@
 openCloseKeyboard();
 switchLanguage();
 dragKeybord();
-clickKeyboard();
+clickKeys();
 
 
 function openCloseKeyboard() {
@@ -14,36 +14,6 @@ function openCloseKeyboard() {
     btnKeyboard.addEventListener("click", () => {
         keyboard.classList.toggle("keyboard_hidden");
     });
-}
-
-function switchLanguage() {
-    let switchsLanguage = document.querySelectorAll(".switch-language");
-    let keyboard = document.querySelector(".keyboard");
-
-    for (let switchLanguage of switchsLanguage) {
-        switchLanguage.addEventListener("click", () => {
-            if (keyboard.dataset.language == "ENG") {
-                keyboard.dataset.language = "RUS";
-            } else {
-                keyboard.dataset.language = "ENG";
-            }
-
-            switchLanguageKeyboard(keyboard.dataset.language);
-        });
-    }
-
-    function switchLanguageKeyboard(language) {
-        let keys = Array.from(document.querySelectorAll(".keyboard__key")).filter(key => key.dataset.letterEng && key.dataset.letterRus);
-
-        switch (language) {
-            case "ENG": 
-                keys.forEach(key => key.innerText = key.dataset.letterEng);
-                break;
-            case "RUS":
-                keys.forEach(key => key.innerText = key.dataset.letterRus);
-                break;
-        }
-    }
 }
 
 function dragKeybord() {
@@ -87,7 +57,43 @@ function dragKeybord() {
     });
 }
 
-function clickKeyboard() {
+function switchLanguage() {
+    let switchsLanguage = document.querySelectorAll(".switch-language");
+    let keyboard = document.querySelector(".keyboard");
+    let capslock = document.querySelector('.keyboard__key[data-key-name="capslock"');
+
+    for (let switchLanguage of switchsLanguage) {
+        switchLanguage.addEventListener("click", () => {
+            if (keyboard.dataset.language == "ENG") {
+                keyboard.dataset.language = "RUS";
+            } else {
+                keyboard.dataset.language = "ENG";
+            }
+
+            switchLanguageKeyboard(keyboard.dataset.language);
+
+            if (capslock.classList.contains("keyboard__key_active")) {
+                transformKeysByCapslock(true);
+            }
+        });
+    }
+
+    function switchLanguageKeyboard(language) {
+        let keys = Array.from(document.querySelectorAll(".keyboard__key")).filter(key => key.dataset.keyEng && key.dataset.keyRus);
+
+        switch (language) {
+            case "ENG":
+                keys.forEach(key => key.innerText = key.dataset.keyEng);
+                break;
+            case "RUS":
+                keys.forEach(key => key.innerText = key.dataset.keyRus);
+                break;
+        }
+    }
+}
+
+
+function clickKeys() {
     let keyboard = document.querySelector(".keyboard");
     let textarea = document.querySelector(".page__textarea");
 
@@ -108,10 +114,11 @@ function clickKeyboard() {
                     break;
                 case "capslock":
                     key.classList.toggle("keyboard__key_active");
-                    transformLetters(key.classList.contains("keyboard__key_active"));
+                    transformKeysByCapslock(key.classList.contains("keyboard__key_active"));
                     break;
                 case "shift":
                     key.classList.toggle("keyboard__key_active");
+                    transformKeysByShift(keyboard.dataset.language, key.classList.contains("keyboard__key_active"));
                     break;
                 case "space_bar":
                     textarea.value += "\0";
@@ -122,23 +129,49 @@ function clickKeyboard() {
         }
 
         textarea.focus();
-
-        function transformLetters(capslockIsActive) {
-            let keys = Array.from(document.querySelectorAll(".keyboard__key"));
-            let letters = keys.filter(letter => {
-                if ((letter.innerText.toLowerCase().charCodeAt() >= 97 && letter.innerText.toLowerCase().charCodeAt() <= 122 ||
-                    letter.innerText.toLowerCase().charCodeAt() >= 1072 && letter.innerText.toLowerCase().charCodeAt() <= 1103) && 
-                    letter.innerText.length == 1) {
-                    return letter;
-                }
-            });
-
-            if (capslockIsActive) {
-                letters.forEach(letter => letter.innerText = letter.innerText.toUpperCase());
-            } else {
-                letters.forEach(letter => letter.innerText = letter.innerText.toLowerCase());
-            }
-
-        }
     });
 }
+
+function transformKeysByShift(language, shiftIsActive) {
+    let keys = Array.from(document.querySelectorAll(".keyboard__key")).filter(key => key.dataset.shiftRus || key.dataset.shiftEng || key.dataset.shift);
+
+    if (shiftIsActive) {
+        switch (language) {
+            case "RUS":
+                keys.forEach(key => key.innerText = key.dataset.shiftRus || key.dataset.shift);
+                break;
+            case "ENG":
+                keys.forEach(key => key.innerText = key.dataset.shiftEng || key.dataset.shift);
+                break;
+        }
+    } else {
+        switch (language) {
+            case "RUS":
+                keys.forEach(key => key.innerText = key.dataset.keyRus || key.dataset.key);
+                break;
+            case "ENG":
+                keys.forEach(key => key.innerText = key.dataset.keyEng || key.dataset.key);
+                break;
+        }
+    }
+
+    transformKeysByCapslock(shiftIsActive);
+}
+
+function transformKeysByCapslock(capslockIsActive) {
+    let keys = Array.from(document.querySelectorAll(".keyboard__key"));
+    let letters = keys.filter(letter => {
+        if ((letter.innerText.toLowerCase().charCodeAt() >= 97 && letter.innerText.toLowerCase().charCodeAt() <= 122 ||
+            letter.innerText.toLowerCase().charCodeAt() >= 1072 && letter.innerText.toLowerCase().charCodeAt() <= 1103) &&
+            letter.innerText.length == 1) {
+            return letter;
+        }
+    });
+
+    if (capslockIsActive) {
+        letters.forEach(letter => letter.innerText = letter.innerText.toUpperCase());
+    } else {
+        letters.forEach(letter => letter.innerText = letter.innerText.toLowerCase());
+    }
+}
+
