@@ -96,6 +96,8 @@ function switchLanguage() {
 function clickKeys() {
     let keyboard = document.querySelector(".keyboard");
     let textarea = document.querySelector(".page__textarea");
+    let capslock = document.querySelector('.keyboard__key[data-key-name="capslock"');
+    let shift = document.querySelector('.keyboard__key[data-key-name="shift"');
 
     keyboard.addEventListener("click", (event) => {
         let key = event.target.closest(".keyboard__key");
@@ -113,12 +115,28 @@ function clickKeys() {
                     textarea.value += "\n";
                     break;
                 case "capslock":
-                    key.classList.toggle("keyboard__key_active");
-                    transformKeysByCapslock(key.classList.contains("keyboard__key_active"));
+                    capslock.classList.toggle("keyboard__key_active");
+                    if (shift.classList.contains("keyboard__key_active")) {
+                        transformKeysByCapslock(!capslock.classList.contains("keyboard__key_active"));
+                    } else {
+                        transformKeysByCapslock(capslock.classList.contains("keyboard__key_active"));
+                    }
                     break;
                 case "shift":
-                    key.classList.toggle("keyboard__key_active");
-                    transformKeysByShift(keyboard.dataset.language, key.classList.contains("keyboard__key_active"));
+                    shift.classList.toggle("keyboard__key_active");
+                    if (capslock.classList.contains("keyboard__key_active")) {
+                        transformKeysByShift(
+                            keyboard.dataset.language,
+                            shift.classList.contains("keyboard__key_active"),
+                            !shift.classList.contains("keyboard__key_active")
+                        );
+                    } else {
+                        transformKeysByShift(
+                            keyboard.dataset.language,
+                            shift.classList.contains("keyboard__key_active"),
+                            shift.classList.contains("keyboard__key_active")
+                        );
+                    }
                     break;
                 case "space_bar":
                     textarea.value += "\0";
@@ -132,7 +150,7 @@ function clickKeys() {
     });
 }
 
-function transformKeysByShift(language, shiftIsActive) {
+function transformKeysByShift(language, shiftIsActive, capslockIsActive) {
     let keys = Array.from(document.querySelectorAll(".keyboard__key")).filter(key => key.dataset.shiftRus || key.dataset.shiftEng || key.dataset.shift);
 
     if (shiftIsActive) {
@@ -155,7 +173,7 @@ function transformKeysByShift(language, shiftIsActive) {
         }
     }
 
-    transformKeysByCapslock(shiftIsActive);
+    transformKeysByCapslock(capslockIsActive);
 }
 
 function transformKeysByCapslock(capslockIsActive) {
