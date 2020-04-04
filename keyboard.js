@@ -61,6 +61,7 @@ function switchLanguage() {
     let switchsLanguage = document.querySelectorAll(".switch-language");
     let keyboard = document.querySelector(".keyboard");
     let capslock = document.querySelector('.keyboard__key[data-key-name="capslock"');
+    let shift = document.querySelector('.keyboard__key[data-key-name="shift"');
 
     for (let switchLanguage of switchsLanguage) {
         switchLanguage.addEventListener("click", () => {
@@ -72,8 +73,14 @@ function switchLanguage() {
 
             switchLanguageKeyboard(keyboard.dataset.language);
 
-            if (capslock.classList.contains("keyboard__key_active")) {
+            if (capslock.classList.contains("keyboard__key_active") && shift.classList.contains("keyboard__key_active")) {
+                transformKeysByShift(keyboard.dataset.language, true, false);
+            } else if (shift.classList.contains("keyboard__key_active")){
+                transformKeysByShift(keyboard.dataset.language, true, true);
+            } else if (capslock.classList.contains("keyboard__key_active")){
                 transformKeysByCapslock(true);
+            } else {
+                
             }
         });
     }
